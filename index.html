@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetter App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Введите город...">
+            <button id="searchBtn">Поиск</button>
+        </div>
+
+        <div id="error" class="error" style="display: none;">Город не найден!</div>
+
+        <div class="weather-info" id="weatherContent" style="display: none;">
+            <h2 id="cityName">Город</h2>
+            <p id="description">Описание</p>
+            <img src="" id="weatherIcon" alt="Погода">
+            <div class="temp"><span id="tempValue">0</span>°C</div>
+            
+            <div class="details">
+                <div class="col">
+                    <p>Влажность</p>
+                    <strong id="humidity">0%</strong>
+                </div>
+                <div class="col">
+                    <p>Ветер</p>
+                    <strong id="windSpeed">0 м/с</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
