@@ -31,43 +31,31 @@ function displayWeather(data) {
     const icon = data.weather[0].icon;
     document.getElementById('weatherIcon').src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-    // --- НАЧАЛО БЛОКА АНИМАЦИИ ---
+    // Работа с фоном и анимацией
     const animationContainer = document.getElementById('weatherAnimation');
-    const weatherMain = data.weather[0].main; // Основной тип погоды (Clouds, Rain, Clear и т.д.)
+    const weatherMain = data.weather[0].main;
     
-    // Сначала убираем все старые классы анимации
     animationContainer.classList.remove('storm-clouds');
-    animationContainer.style.display = 'none'; // Скрываем анимацию по умолчанию
+    animationContainer.style.display = 'none';
 
     let backgroundGradient = "";
 
-    // Логика смены фона и анимации
     if (weatherMain === 'Clear') {
-        // Ясно
         backgroundGradient = "linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%)";
-        // Анимацию не включаем
     } else if (weatherMain === 'Clouds') {
-        // Облачно (просто тучи летают)
         backgroundGradient = "linear-gradient(to bottom, #bdc3c7, #2c3e50)";
-        animationContainer.style.display = 'block'; // Показываем тучи
+        animationContainer.style.display = 'block';
     } else if (weatherMain === 'Rain' || weatherMain === 'Drizzle' || weatherMain === 'Thunderstorm') {
-        // Дождь, морось или гроза (черные тучи)
         backgroundGradient = "linear-gradient(to bottom, #202020, #111111)";
-        animationContainer.style.display = 'block'; // Показываем тучи
-        animationContainer.classList.add('storm-clouds'); // Делаем их темными
+        animationContainer.style.display = 'block';
+        animationContainer.classList.add('storm-clouds');
     } else if (weatherMain === 'Snow') {
-        // Снег
         backgroundGradient = "linear-gradient(to bottom, #e6e9f0 0%, #eef1f5 100%)";
-        // Здесь можно потом добавить анимацию снега
     } else {
-        // Дефолтный фон для всего остального (туман и т.д.)
         backgroundGradient = "linear-gradient(to bottom, #304352, #d7d2cc)";
     }
 
-    // Применяем новый градиент к фону страницы
     document.body.style.background = backgroundGradient;
-    // --- КОНЕЦ БЛОКА АНИМАЦИИ ---
-
     document.getElementById('weatherContent').style.display = "block";
     document.getElementById('error').style.display = "none";
 }
@@ -77,7 +65,6 @@ function showError() {
     document.getElementById('weatherContent').style.display = "none";
 }
 
-// Слушатели событий
 searchBtn.addEventListener('click', () => checkWeather(cityInput.value));
 cityInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') checkWeather(cityInput.value);
