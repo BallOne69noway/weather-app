@@ -65,3 +65,56 @@ button {
     color: #ff4d4d;
     font-weight: bold;
 }
+
+
+/* Основной контейнер для анимации */
+.weather-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Чтобы анимация была ЗА контентом */
+    overflow: hidden;
+    pointer-events: none; /* Чтобы тучи не мешали нажимать кнопки */
+    display: none; /* Сначала скрыто, включим через JS */  
+}
+
+/* Общие стили для туч */
+.cloud {
+    position: absolute;
+    background: white; /* Цвет тучи (для ясной погоды) */
+    border-radius: 50px;
+    opacity: 0.8;
+    filter: blur(10px); /* Легкое размытие для реализма */
+}
+
+/* Форма тучи (можно сделать сложнее, но пока так) */
+.cloud::after, .cloud::before {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.cloud { width: 200px; height: 60px; }
+.cloud::after { width: 100px; height: 100px; top: -50px; left: 25px; }
+.cloud::before { width: 80px; height: 80px; top: -30px; left: 90px; }
+
+/* Индивидуальные настройки для туч (размер, позиция, скорость) */
+.cloud1 { top: 10%; animation: moveClouds 15s linear infinite; transform: scale(0.6); }
+.cloud2 { top: 30%; animation: moveClouds 25s linear infinite; transform: scale(1); opacity: 0.5; }
+.cloud3 { top: 50%; animation: moveClouds 20s linear infinite; transform: scale(0.8); }
+
+/* Анимация движения туч */
+@keyframes moveClouds {
+    0% { left: -250px; } /* Уходим за левый край */
+    100% { left: 100%; } /* Уходим за правый край */
+}
+
+/* Класс для дождливых/пасмурных туч (сделаем их черными/серыми) */
+.storm-clouds .cloud {
+    background: #4f4f4f; /* Темно-серый цвет */
+    opacity: 0.9;
+    filter: blur(5px);
+}
