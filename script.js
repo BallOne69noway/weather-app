@@ -16,7 +16,6 @@ async function checkWeather(city) {
         }
 
         const data = await response.json();
-        console.log("Данные получены:", data); // Для отладки
         displayWeather(data);
         
     } catch (err) {
@@ -32,33 +31,41 @@ function displayWeather(data) {
     document.getElementById('humidity').innerText = data.main.humidity + "%";
     document.getElementById('windSpeed').innerText = data.wind.speed + " м/с";
     
+    // Получаем большую иконку (@4x)
     const icon = data.weather[0].icon;
     document.getElementById('weatherIcon').src = `https://openweathermap.org/img/wn/${icon}@4x.png`;
 
-    // Логика анимации и фона
+    // Логика анимации и фона (более iOS градиенты)
     const animationContainer = document.getElementById('weatherAnimation');
     const weatherMain = data.weather[0].main; 
     
+    // Сброс классов
     animationContainer.classList.remove('storm-clouds');
     animationContainer.style.display = 'none';
 
     let bg = "";
 
     if (weatherMain === 'Clear') {
-        bg = "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)";
+        // Ясно (iOS синий)
+        bg = "linear-gradient(180deg, #2196F3 0%, #64B5F6 100%)";
     } else if (weatherMain === 'Clouds') {
-        bg = "linear-gradient(135deg, #bdc3c7, #2c3e50)";
-        animationContainer.style.display = 'block';
+        // Облачно (iOS серый)
+        bg = "linear-gradient(180deg, #9E9E9E 0%, #616161 100%)";
+        animationContainer.style.display = 'block'; // Включаем облака
     } else if (weatherMain === 'Rain' || weatherMain === 'Drizzle' || weatherMain === 'Thunderstorm') {
-        bg = "linear-gradient(135deg, #202020, #111111)";
+        // Дождь/Гроза (темный iOS)
+        bg = "linear-gradient(180deg, #212121 0%, #000000 100%)";
         animationContainer.style.display = 'block';
-        animationContainer.classList.add('storm-clouds');
+        animationContainer.classList.add('storm-clouds'); // Делаем облака темными
     } else if (weatherMain === 'Snow') {
-        bg = "linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%)";
+        // Снег
+        bg = "linear-gradient(180deg, #E0E0E0 0%, #BDBDBD 100%)";
     } else {
-        bg = "linear-gradient(135deg, #304352, #d7d2cc)";
+        // Дефолтный (туман и т.д.)
+        bg = "linear-gradient(180deg, #455A64 0%, #263238 100%)";
     }
 
+    // Применяем фон и показываем контент
     document.body.style.background = bg;
     document.getElementById('weatherContent').style.display = "block";
     document.getElementById('error').style.display = "none";
@@ -69,7 +76,7 @@ function showError() {
     document.getElementById('weatherContent').style.display = "none";
 }
 
-// Слушатели
+// Слушатели событий
 searchBtn.addEventListener('click', () => {
     checkWeather(cityInput.value);
 });
