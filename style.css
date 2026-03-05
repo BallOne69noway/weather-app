@@ -1,77 +1,29 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1a1a1a;
-    color: white;
-    transition: background 1.5s ease;
-    overflow: hidden;
+    min-height: 100vh; display: flex; justify-content: center; align-items: center;
+    background: #1a1a1a; color: white; transition: background 1.5s ease; overflow: hidden;
 }
-
 .container {
-    position: relative;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    padding: 35px;
-    border-radius: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.1);
+    position: relative; z-index: 100; background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px); border-radius: 30px; display: flex;
+    width: 90%; max-width: 800px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
 }
-
-/* Стили ввода */
-.search-box { display: flex; margin-bottom: 25px; }
-input { flex: 1; padding: 15px; border: none; border-radius: 15px 0 0 15px; outline: none; font-size: 16px; }
-button { padding: 15px 20px; border: none; background: #007AFF; color: white; border-radius: 0 15px 15px 0; cursor: pointer; font-weight: bold; }
-.temp { font-size: 5.5rem; font-weight: 200; margin: 10px 0; }
-.error { color: #ff453a; margin-bottom: 15px; font-weight: bold; }
-
-/* --- МАГИЯ 3D ОБЛАКОВ --- */
-.weather-animation {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
-    pointer-events: none;
-    display: none;
+.main-panel { flex: 1; padding: 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+.forecast-panel { width: 280px; padding: 40px 20px; background: rgba(255, 255, 255, 0.03); }
+.forecast-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+.temp { font-size: 5rem; font-weight: 100; margin: 20px 0; }
+.search-box { display: flex; margin-bottom: 20px; }
+input { flex: 1; padding: 12px; border-radius: 10px 0 0 10px; border: none; outline: none; }
+button { padding: 12px; border: none; background: #007AFF; color: white; border-radius: 0 10px 10px 0; cursor: pointer; }
 
-.cloud {
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 900px;
-    height: 500px;
-    opacity: 0;
-    animation: move3D linear infinite;
-}
-
-/* Наслоение для эффекта глубины */
-.c1 { top: -5%;  animation-duration: 35s; transform: scale(1.2); filter: blur(2px); z-index: 10; opacity: 0.7; }
-.c2 { top: 10%;  animation-duration: 45s; transform: scale(1.5); filter: blur(5px); z-index: 5;  opacity: 0.5; animation-delay: -10s; }
-.c3 { top: 25%;  animation-duration: 55s; transform: scale(1.8); filter: blur(8px); z-index: 2;  opacity: 0.4; animation-delay: -20s; }
-.c4 { top: 45%;  animation-duration: 40s; transform: scale(1.3); filter: blur(4px); z-index: 8;  opacity: 0.6; animation-delay: -5s; }
-.c5 { top: 60%;  animation-duration: 70s; transform: scale(2.0); filter: blur(10px); z-index: 1; opacity: 0.3; }
-.c6 { top: -15%; animation-duration: 85s; transform: scale(2.2); filter: blur(15px); z-index: 0; opacity: 0.2; animation-delay: -30s; }
-
-@keyframes move3D {
-    0% { transform: translateX(-110%) translateY(0px); opacity: 0; }
-    15% { opacity: inherit; }
-    50% { transform: translateX(10%) translateY(-30px); }
-    85% { opacity: inherit; }
-    100% { transform: translateX(150%) translateY(0px); opacity: 0; }
-}
-
-/* Привязка твоих PNG файлов */
+/* Облака */
+.weather-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: none; }
+.cloud { position: absolute; background-size: contain; background-repeat: no-repeat; width: 600px; height: 300px; opacity: 0; animation: move3D linear infinite; }
 .white-clouds .cloud { background-image: url('cloud_white.png'); }
 .dark-clouds .cloud { background-image: url('cloud_dark.png'); }
+.c1 { top: 10%; animation-duration: 30s; transform: scale(1.2); opacity: 0.5; }
+.c2 { top: 40%; animation-duration: 45s; transform: scale(1.5); animation-delay: -10s; opacity: 0.3; }
+@keyframes move3D { 0% { left: -600px; opacity: 0; } 15% { opacity: inherit; } 85% { opacity: inherit; } 100% { left: 100%; opacity: 0; } }
