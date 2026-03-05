@@ -11,7 +11,6 @@ body {
 .main-panel { flex: 1; padding: 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
 .forecast-panel { width: 280px; padding: 40px 20px; background: rgba(255, 255, 255, 0.03); }
 
-/* Мобильная адаптация */
 @media (max-width: 600px) {
     .container { flex-direction: column; max-width: 350px; }
     .main-panel { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -33,9 +32,18 @@ button { padding: 12px; border: none; background: #007AFF; color: white; border-
 .white-clouds .cloud { background-image: url('cloud_white.png'); }
 .dark-clouds .cloud { background-image: url('cloud_dark.png'); }
 
-.c1 { top: 5%; animation-duration: 35s; opacity: 0.5; }
-.c2 { top: 35%; animation-duration: 50s; animation-delay: -5s; opacity: 0.3; }
-.c3 { top: 65%; animation-duration: 45s; animation-delay: -15s; opacity: 0.4; }
+/* Настройки Parallax: разная скорость, высота, размер и ЗАДЕРЖКА */
+/* c1-c4 - ближний слой (быстрее, больше) */
+.c1 { top: 5%;  animation-duration: 35s; animation-delay: -5s; transform: scale(1.1); filter: blur(1px); opacity: 0.6; }
+.c2 { top: 25%; animation-duration: 45s; animation-delay: -15s; transform: scale(1.3); filter: blur(2px); opacity: 0.5; }
+.c3 { top: 45%; animation-duration: 40s; animation-delay: -25s; transform: scale(1.2); filter: blur(0px); opacity: 0.6; }
+.c4 { top: 65%; animation-duration: 38s; animation-delay: -10s; transform: scale(1.1); filter: blur(1px); opacity: 0.5; }
+
+/* c5-c8 - дальний слой (медленнее, меньше) */
+.c5 { top: 15%; animation-duration: 60s; animation-delay: -30s; transform: scale(0.9); filter: blur(4px); opacity: 0.3; }
+.c6 { top: 35%; animation-duration: 55s; animation-delay: -45s; transform: scale(0.8); filter: blur(5px); opacity: 0.4; }
+.c7 { top: 55%; animation-duration: 65s; animation-delay: -20s; transform: scale(0.9); filter: blur(3px); opacity: 0.3; }
+.c8 { top: 75%; animation-duration: 58s; animation-delay: -35s; transform: scale(0.8); filter: blur(4px); opacity: 0.4; }
 
 @keyframes move3D { 0% { left: -650px; opacity: 0; } 15% { opacity: inherit; } 85% { opacity: inherit; } 100% { left: 110%; opacity: 0; } }
 .error { color: #ff453a; font-weight: bold; margin-bottom: 15px; }
