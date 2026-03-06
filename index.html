@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic Weather 5-Day - Плавные облака</title>
+    <title>Weather App + Geolocation</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,9 +17,10 @@
         <div class="main-panel">
             <div class="search-box">
                 <input type="text" id="cityInput" placeholder="Введите город...">
+                <button id="geoBtn" title="Найти по геолокации">📍</button>
                 <button id="searchBtn">Поиск</button>
             </div>
-            <div id="error" class="error" style="display: none;">Город не найден! Проверьте название.</div>
+            <div id="error" class="error" style="display: none;">Город не найден!</div>
             
             <div class="weather-info" id="weatherContent" style="display: none;">
                 <h2 id="cityName">Город</h2>
